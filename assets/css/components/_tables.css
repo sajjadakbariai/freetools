@@ -1,0 +1,33 @@
+/* جداول نئومورفیک */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table th, .table td {
+  padding: 1rem;
+  text-align: right;
+  border-bottom: 1px solid rgba(163, 177, 198, 0.3);
+}
+
+.table th {
+  font-weight: 600;
+  background: rgba(163, 177, 198, 0.1);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-hover tr:hover td {
+  background: rgba(163, 177, 198, 0.1);
+}
+
+.table-striped tr:nth-child(even) td {
+  background: rgba(163, 177, 198, 0.05);
+}
