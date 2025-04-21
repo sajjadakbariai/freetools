@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبدل HEX به RGB - ToolsFree.ir</title>
+    <meta name="description" content="تبدیل آنلاین کدهای رنگ HEX به RGB و بالعکس به صورت رایگان">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/tools/converters.css">
+    <style>
+        .color-converter-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .color-converter-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .color-box {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .color-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .color-preview {
+            width: 100%;
+            height: 60px;
+            margin-top: 15px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+        .color-input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .color-input-group label {
+            min-width: 80px;
+            font-family: var(--font-mono);
+        }
+        .color-input-group input[type="text"] {
+            flex-grow: 1;
+        }
+        .color-sliders {
+            margin-top: 15px;
+        }
+        .color-slider {
+            margin-bottom: 15px;
+        }
+        .color-slider label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .color-slider input[type="range"] {
+            width: 100%;
+        }
+        .color-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .color-value-box {
+            padding: 10px;
+            border-radius: var(--border-radius-md);
+            background: var(--card-bg);
+            text-align: center;
+        }
+        .color-value-box .value {
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+        .color-value-box .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .color-formats {
+            margin-top: 20px;
+        }
+        .color-formats button {
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="neumorphic">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="ToolsFree.ir Logo">
+                <h1>ToolsFree.ir</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="neumorphic-btn">خانه</a></li>
+                <li><a href="../../index.html#categories" class="neumorphic-btn">دسته‌بندی ابزارها</a></li>
+                <li><a href="../../about.html" class="neumorphic-btn">درباره ما</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn neumorphic">
+            <i class="icon-menu"></i>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="tool-header neumorphic">
+            <h1><i class="icon-color"></i> مبدل HEX به RGB</h1>
+            <p>تبدیل کدهای رنگ هگزادسیمال به RGB و بالعکس</p>
+        </div>
+        
+        <div class="tool-body">
+            <div class="color-converter-container">
+                <div class="color-box neumorphic">
+                    <h3>کد رنگ HEX</h3>
+                    <div class="color-input-group">
+                        <label>#</label>
+                        <input type="text" id="hex-input" class="neumorphic-inset" placeholder="FFFFFF" maxlength="6">
+                    </div>
+                    <div class="color-actions">
+                        <button id="hex-to-rgb-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-arrow-right"></i> HEX به RGB
+                        </button>
+                        <button id="clear-hex-btn" class="btn btn-danger neumorphic">
+                            <i class="icon-trash"></i> پاک کردن
+                        </button>
+                        <button id="random-color-btn" class="btn btn-secondary neumorphic">
+                            <i class="icon-random"></i> رنگ تصادفی
+                        </button>
+                    </div>
+                    <div id="hex-color-preview" class="color-preview"></div>
+                </div>
+                
+                <div class="color-box neumorphic">
+                    <h3>مقدار RGB</h3>
+                    <div class="color-sliders">
+                        <div class="color-slider">
+                            <label>
+                                <span>قرمز:</span>
+                                <span id="red-value">255</span>
+                            </label>
+                            <input type="range" id="red-slider" min="0" max="255" value="255" class="neumorphic">
+                        </div>
+                        <div class="color-slider">
+                            <label>
+                                <span>سبز:</span>
+                                <span id="green-value">255</span>
+                            </label>
+                            <input type="range" id="green-slider" min="0" max="255" value="255" class="neumorphic">
+                        </div>
+                        <div class="color-slider">
+                            <label>
+                                <span>آبی:</span>
+                                <span id="blue-value">255</span>
+                            </label>
+                            <input type="range" id="blue-slider" min="0" max="255" value="255" class="neumorphic">
+                        </div>
+                    </div>
+                    <div class="color-actions">
+                        <button id="rgb-to-hex-btn" class="btn btn-accent neumorphic">
+                            <i class="icon-arrow-left"></i> RGB به HEX
+                        </button>
+                        <button id="copy-rgb-btn" class="btn btn-success neumorphic">
+                            <i class="icon-copy"></i> کپی RGB
+                        </button>
+                    </div>
+                    <div id="rgb-color-preview" class="color-preview"></div>
+                </div>
+            </div>
+            
+            <div class="color-values neumorphic">
+                <div class="color-value-box">
+                    <div class="value" id="hex-value">#FFFFFF</div>
+                    <div class="label">HEX</div>
+                </div>
+                <div class="color-value-box">
+                    <div class="value" id="rgb-value">rgb(255, 255, 255)</div>
+                    <div class="label">RGB</div>
+                </div>
+                <div class="color-value-box">
+                    <div class="value" id="hsl-value">hsl(0, 0%, 100%)</div>
+                    <div class="label">HSL</div>
+                </div>
+            </div>
+            
+            <div class="color-formats neumorphic">
+                <h3><i class="icon-format"></i> فرمت‌های دیگر رنگ</h3>
+                <button id="copy-hex-btn" class="btn btn-small neumorphic">کپی HEX</button>
+                <button id="copy-rgb-full-btn" class="btn btn-small neumorphic">کپی RGB</button>
+                <button id="copy-hsl-btn" class="btn btn-small neumorphic">کپی HSL</button>
+                <button id="copy-rgb-css-btn" class="btn btn-small neumorphic">کپی RGB CSS</button>
+                <button id="copy-rgb-js-btn" class="btn btn-small neumorphic">کپی RGB JS</button>
+            </div>
+        </div>
+        
+        <div class="tool-info neumorphic">
+            <h3><i class="icon-help"></i> راهنمای استفاده</h3>
+            <div class="info-content">
+                <p><strong>کد رنگ HEX چیست؟</strong></p>
+                <p>کدهای HEX روشی برای نمایش رنگ‌ها با استفاده از سیستم اعداد پایه 16 هستند. هر رنگ با ترکیبی از 6 کاراکتر (0-9 و A-F) که به صورت #RRGGBB نمایش داده می‌شوند، مشخص می‌شود.</p>
+                
+                <p><strong>مقادیر RGB چیست؟</strong></p>
+                <p>RGB مخفف Red, Green, Blue است و هر رنگ با سه مقدار بین 0 تا 255 مشخص می‌شود که شدت هر یک از رنگ‌های اصلی را نشان می‌دهد.</p>
+                
+                <p><strong>نحوه استفاده از ابزار:</strong></p>
+                <ol>
+                    <li>برای تبدیل HEX به RGB، کد HEX را وارد کرده و دکمه "HEX به RGB" را بزنید</li>
+                    <li>برای تبدیل RGB به HEX، اسلایدرها را تنظیم کرده و دکمه "RGB به HEX" را بزنید</li>
+                    <li>می‌توانید با دکمه "رنگ تصادفی" یک رنگ تصادفی ایجاد کنید</li>
+                    <li>برای کپی کردن هر فرمت رنگی از دکمه‌های مربوطه استفاده کنید</li>
+                </ol>
+                
+                <h4>نمونه کدهای رنگ:</h4>
+                <table class="sample-table">
+                    <tr>
+                        <th>رنگ</th>
+                        <th>HEX</th>
+                        <th>RGB</th>
+                    </tr>
+                    <tr>
+                        <td style="background:#FF0000;"></td>
+                        <td>#FF0000</td>
+                        <td>rgb(255, 0, 0)</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#00FF00;"></td>
+                        <td>#00FF00</td>
+                        <td>rgb(0, 255, 0)</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#0000FF;"></td>
+                        <td>#0000FF</td>
+                        <td>rgb(0, 0, 255)</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#FFFF00;"></td>
+                        <td>#FFFF00</td>
+                        <td>rgb(255, 255, 0)</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#FF00FF;"></td>
+                        <td>#FF00FF</td>
+                        <td>rgb(255, 0, 255)</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#00FFFF;"></td>
+                        <td>#00FFFF</td>
+                        <td>rgb(0, 255, 255)</td>
+                    </tr>
+                </table>
+                
+                <p><strong>کاربردهای این ابزار:</strong></p>
+                <ul>
+                    <li>تبدیل کدهای رنگ بین فرمت‌های مختلف</li>
+                    <li>انتخاب رنگ‌های هماهنگ برای طراحی وب</li>
+                    <li>دریافت مقادیر دقیق رنگ‌ها از تصاویر</li>
+                    <li>تنظیم رنگ‌ها برای برنامه‌نویسی CSS و JavaScript</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="neumorphic">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ابزارهای مرتبط</h3>
+                <ul>
+                    <li><a href="rgb-to-hex.html">مبدل RGB به HEX</a></li>
+                    <li><a href="color-picker.html">انتخابگر رنگ</a></li>
+                    <li><a href="gradient-generator.html">تولیدکننده گرادیان</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>منابع آموزشی</h3>
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Web_colors" target="_blank">رنگ‌های وب در ویکی‌پدیا</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value" target="_blank">مستندات MDN</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> ToolsFree.ir - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های اصلی -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/tools/converters/hex-rgb.js"></script>
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
