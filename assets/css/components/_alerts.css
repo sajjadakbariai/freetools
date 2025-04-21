@@ -1,0 +1,57 @@
+/* آلرت‌های نئومورفیک */
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+}
+
+.alert-success {
+  background: rgba(46, 204, 113, 0.1);
+  color: var(--success-color);
+  border-right: 3px solid var(--success-color);
+}
+
+.alert-danger {
+  background: rgba(231, 76, 60, 0.1);
+  color: var(--danger-color);
+  border-right: 3px solid var(--danger-color);
+}
+
+.alert-warning {
+  background: rgba(243, 156, 18, 0.1);
+  color: var(--warning-color);
+  border-right: 3px solid var(--warning-color);
+}
+
+.alert-info {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--info-color);
+  border-right: 3px solid var(--info-color);
+}
+
+.alert-dismissible {
+  position: relative;
+  padding-right: 3rem;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.alert-dismissible .close:hover {
+  opacity: 1;
+}
