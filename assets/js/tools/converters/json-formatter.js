@@ -1,168 +1,149 @@
 /**
  * JSON Formatter Tool
- * ابزار فرمت و اعتبارسنجی JSON
+ * فرمت‌کننده و اعتبارسنج JSON
  */
-
-const JSONFormatter = {
-    /**
-     * فرمت کردن JSON با رعایت تو رفتگی‌ها
-     * @param {string} jsonString - رشته JSON ورودی
-     * @returns {string} - JSON فرمت شده
-     */
-    format: function(jsonString) {
-        try {
-            const obj = JSON.parse(jsonString);
-            return JSON.stringify(obj, null, 4);
-        } catch (error) {
-            throw new Error(`خطای ساختاری در JSON: ${error.message}`);
-        }
-    },
-    
-    /**
-     * فشرده کردن JSON با حذف فاصله‌های اضافه
-     * @param {string} jsonString - رشته JSON ورودی
-     * @returns {string} - JSON فشرده شده
-     */
-    minify: function(jsonString) {
-        try {
-            const obj = JSON.parse(jsonString);
-            return JSON.stringify(obj);
-        } catch (error) {
-            throw new Error(`خطای ساختاری در JSON: ${error.message}`);
-        }
-    },
-    
-    /**
-     * اعتبارسنجی ساختار JSON
-     * @param {string} jsonString - رشته JSON ورودی
-     * @returns {object} - نتیجه اعتبارسنجی
-     */
-    validate: function(jsonString) {
-        try {
-            JSON.parse(jsonString);
-            return {
-                valid: true,
-                message: "JSON معتبر است",
-                size: this.getSize(jsonString),
-                lines: jsonString.split('\n').length
-            };
-        } catch (error) {
-            return {
-                valid: false,
-                message: error.message,
-                position: this.findErrorPosition(jsonString, error)
-            };
-        }
-    },
-    
-    /**
-     * پیدا کردن موقعیت خطا در JSON
-     * @param {string} jsonString - رشته JSON ورودی
-     * @param {Error} error - شیء خطا
-     * @returns {object} - موقعیت خطا (خط و ستون)
-     */
-    findErrorPosition: function(jsonString, error) {
-        if (!error.message.includes('at position')) {
-            return null;
-        }
-        
-        const positionMatch = error.message.match(/at position (\d+)/);
-        if (!positionMatch) return null;
-        
-        const position = parseInt(positionMatch[1]);
-        const lines = jsonString.substring(0, position).split('\n');
-        
-        return {
-            line: lines.length,
-            column: lines[lines.length - 1].length + 1
-        };
-    },
-    
-    /**
-     * محاسبه حجم JSON
-     * @param {string} jsonString - رشته JSON ورودی
-     * @returns {string} - حجم با واحد مناسب
-     */
-    getSize: function(jsonString) {
-        const bytes = new Blob([jsonString]).size;
-        if (bytes < 1024) return `${bytes} بایت`;
-        if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} کیلوبایت`;
-        return `${(bytes / (1024 * 1024)).toFixed(2)} مگابایت`;
-    },
-    
-    /**
-     * تولید نمونه JSON
-     * @returns {string} - نمونه JSON
-     */
-    generateSample: function() {
-        return JSON.stringify({
-            "name": "ToolsFree.ir",
-            "description": "ابزارهای رایگان برای توسعه‌دهندگان",
-            "version": "1.0.0",
-            "keywords": ["json", "formatter", "tools"],
-            "author": {
-                "name": "تیم ToolsFree",
-                "email": "info@toolsfree.ir"
-            },
-            "contributors": [
-                "Developer 1",
-                "Developer 2"
-            ],
-            "license": "MIT",
-            "features": {
-                "jsonFormatter": true,
-                "jsonValidator": true,
-                "minify": true
-            },
-            "stats": {
-                "users": 1500,
-                "rating": 4.8,
-                "active": true
-            }
-        }, null, 2);
+class JSONFormatterTool {
+    constructor() {
+        this.initEditor();
+        this.bindEvents();
     }
-};
-
-// توابع کمکی برای کار با کلیپ‌بورد
-function copyToClipboard(text) {
-    return new Promise((resolve, reject) => {
+    
+    initEditor() {
+        // ویرایشگر کد برای نمایش JSON فرمت شده
+        this.editor = CodeMirror(document.getElementById('json-editor'), {
+            lineNumbers: true,
+            mode: 'application/json',
+            theme: 'dracula',
+            readOnly: true,
+            lineWrapping: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            indentUnit: 4
+        });
+    }
+    
+    bindEvents() {
+        document.getElementById('format-btn').addEventListener('click', () => this.formatJSON());
+        document.getElementById('minify-btn').addEventListener('click', () => this.minifyJSON());
+        document.getElementById('validate-btn').addEventListener('click', () => this.validateJSON());
+        document.getElementById('clear-btn').addEventListener('click', () => this.clearAll());
+        document.getElementById('sample-btn').addEventListener('click', () => this.loadSample());
+        document.getElementById('copy-btn').addEventListener('click', () => this.copyResult());
+        document.getElementById('download-btn').addEventListener('click', () => this.downloadJSON());
+    }
+    
+    formatJSON() {
+        const input = document.getElementById('json-input').value;
         try {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            document.body.appendChild(textarea);
-            textarea.select();
-            
-            const successful = document.execCommand('copy');
-            document.body.removeChild(textarea);
-            
-            successful ? resolve() : reject(new Error('کپی انجام نشد'));
-        } catch (error) {
-            reject(error);
+            const parsed = JSON.parse(input);
+            const formatted = JSON.stringify(parsed, null, 4);
+            this.editor.setValue(formatted);
+            this.showValidationResult(true, 'JSON با موفقیت فرمت شد.');
+        } catch (e) {
+            this.showValidationResult(false, `خطا در فرمت کردن JSON: ${e.message}`);
         }
-    });
+    }
+    
+    minifyJSON() {
+        const input = document.getElementById('json-input').value;
+        try {
+            const parsed = JSON.parse(input);
+            const minified = JSON.stringify(parsed);
+            this.editor.setValue(minified);
+            this.showValidationResult(true, 'JSON با موفقیت فشرده شد.');
+        } catch (e) {
+            this.showValidationResult(false, `خطا در فشرده کردن JSON: ${e.message}`);
+        }
+    }
+    
+    validateJSON() {
+        const input = document.getElementById('json-input').value;
+        try {
+            JSON.parse(input);
+            this.editor.setValue(input);
+            this.showValidationResult(true, 'JSON معتبر است.');
+        } catch (e) {
+            this.showValidationResult(false, `JSON نامعتبر: ${e.message}`);
+        }
+    }
+    
+    showValidationResult(isValid, message) {
+        const validator = document.getElementById('validator-result');
+        const msgElement = document.getElementById('validation-message');
+        
+        validator.style.display = 'block';
+        validator.className = `validator-result ${isValid ? 'valid' : 'invalid'}`;
+        msgElement.textContent = message;
+    }
+    
+    clearAll() {
+        document.getElementById('json-input').value = '';
+        this.editor.setValue('');
+        document.getElementById('validator-result').style.display = 'none';
+    }
+    
+    loadSample() {
+        const sampleJSON = {
+            "name": "ToolsFree.ir",
+            "description": "مجموعه ابزارهای رایگان برای توسعه‌دهندگان",
+            "tools": [
+                {"name": "JSON Formatter", "category": "Converters"},
+                {"name": "Base64 Encoder", "category": "Converters"},
+                {"name": "JWT Decoder", "category": "Converters"}
+            ],
+            "stats": {
+                "visitors": 15000,
+                "rating": 4.9,
+                "languages": ["Persian", "English"]
+            }
+        };
+        
+        document.getElementById('json-input').value = JSON.stringify(sampleJSON, null, 2);
+    }
+    
+    copyResult() {
+        const jsonValue = this.editor.getValue();
+        if (!jsonValue) {
+            this.showToast('خطا: هیچ محتوایی برای کپی کردن وجود ندارد', 'error');
+            return;
+        }
+        
+        navigator.clipboard.writeText(jsonValue)
+            .then(() => this.showToast('محتوا با موفقیت کپی شد', 'success'))
+            .catch(err => this.showToast(`خطا در کپی کردن: ${err}`, 'error'));
+    }
+    
+    downloadJSON() {
+        const jsonValue = this.editor.getValue();
+        if (!jsonValue) {
+            this.showToast('خطا: هیچ محتوایی برای دانلود وجود ندارد', 'error');
+            return;
+        }
+        
+        try {
+            const blob = new Blob([jsonValue], {type: 'application/json'});
+            saveAs(blob, 'formatted-json.json');
+            this.showToast('فایل با موفقیت دانلود شد', 'success');
+        } catch (e) {
+            this.showToast(`خطا در ایجاد فایل: ${e.message}`, 'error');
+        }
+    }
+    
+    showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.classList.add('show'), 100);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
+    }
 }
 
-// توابع مربوط به دانلود فایل
-function downloadFile(filename, content, type = 'application/json') {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.style.display = 'none';
-    
-    document.body.appendChild(a);
-    a.click();
-    
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
-}
-
-// اتصال توابع به محیط جهانی برای دسترسی از HTML
-window.JSONFormatter = JSONFormatter;
-window.copyToClipboard = copyToClipboard;
-window.downloadFile = downloadFile;
+// Initialize the tool when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new JSONFormatterTool();
+});
