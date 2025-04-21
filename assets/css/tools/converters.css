@@ -568,3 +568,66 @@
         font-size: 0.8rem;
     }
 }
+
+/* HTML to Markdown Converter Specific Styles */
+.html-to-markdown-converter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.html-editor-container, .markdown-editor-container {
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.markdown-preview-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.markdown-preview-container h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.html-tags-cheatsheet table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.html-tags-cheatsheet th, .html-tags-cheatsheet td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    text-align: right;
+}
+
+.html-tags-cheatsheet th {
+    background: var(--hover-color);
+}
+
+.html-tags-cheatsheet td:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .html-markdown-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .html-editor-container, .markdown-editor-container {
+        padding: 15px;
+    }
+    
+    .html-tags-cheatsheet table {
+        font-size: 0.8rem;
+    }
+}
