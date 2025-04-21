@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبدل متن به باینری - ToolsFree.ir</title>
+    <meta name="description" content="تبدیل آنلاین متن به کد باینری و بالعکس به صورت رایگان">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/tools/converters.css">
+    <style>
+        .binary-converter-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .binary-converter-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .binary-box {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .binary-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .binary-options {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-md);
+        }
+        .binary-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+        }
+        .binary-table th, .binary-table td {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .binary-table th {
+            background: var(--hover-color);
+        }
+        .binary-table td {
+            font-size: 0.9rem;
+        }
+        .binary-table td:hover {
+            background: var(--hover-color);
+        }
+        .binary-preview {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-mono);
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="neumorphic">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="ToolsFree.ir Logo">
+                <h1>ToolsFree.ir</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="neumorphic-btn">خانه</a></li>
+                <li><a href="../../index.html#categories" class="neumorphic-btn">دسته‌بندی ابزارها</a></li>
+                <li><a href="../../about.html" class="neumorphic-btn">درباره ما</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn neumorphic">
+            <i class="icon-menu"></i>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="tool-header neumorphic">
+            <h1><i class="icon-binary"></i> مبدل متن به باینری</h1>
+            <p>تبدیل متن به کد باینری (دودویی) و بالعکس</p>
+        </div>
+        
+        <div class="tool-body">
+            <div class="binary-converter-container">
+                <div class="binary-box neumorphic">
+                    <h3>متن اصلی</h3>
+                    <textarea id="input-text" class="neumorphic-inset" placeholder="متن خود را اینجا وارد کنید..."></textarea>
+                    <div class="binary-actions">
+                        <button id="text-to-binary-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-arrow-right"></i> متن به باینری
+                        </button>
+                        <button id="clear-input-btn" class="btn btn-danger neumorphic">
+                            <i class="icon-trash"></i> پاک کردن
+                        </button>
+                        <button id="sample-text-btn" class="btn btn-secondary neumorphic">
+                            <i class="icon-file"></i> نمونه متن
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="binary-box neumorphic">
+                    <h3>کد باینری</h3>
+                    <textarea id="binary-output" class="neumorphic-inset" placeholder="کد باینری اینجا نمایش داده می‌شود..." readonly></textarea>
+                    <div class="binary-actions">
+                        <button id="binary-to-text-btn" class="btn btn-accent neumorphic">
+                            <i class="icon-arrow-left"></i> باینری به متن
+                        </button>
+                        <button id="copy-binary-btn" class="btn btn-success neumorphic">
+                            <i class="icon-copy"></i> کپی
+                        </button>
+                    </div>
+                    <div class="binary-preview">
+                        <h4>پیش‌نمایش باینری:</h4>
+                        <div id="binary-preview"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="binary-options neumorphic">
+                <h3><i class="icon-settings"></i> تنظیمات تبدیل</h3>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="add-spaces" checked>
+                        افزودن فاصله بین کدهای باینری
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="show-unicode">
+                        نمایش کد یونیکد کاراکترها
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="show-ascii">
+                        نمایش کد ASCII کاراکترها
+                    </label>
+                </div>
+            </div>
+            
+            <div class="binary-table-container neumorphic">
+                <h3><i class="icon-table"></i> جدول کدهای باینری پرکاربرد</h3>
+                <table class="binary-table">
+                    <tr>
+                        <th>کاراکتر</th>
+                        <th>کد ASCII</th>
+                        <th>کد باینری</th>
+                        <th>کد یونیکد</th>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>65</td>
+                        <td>01000001</td>
+                        <td>U+0041</td>
+                    </tr>
+                    <tr>
+                        <td>a</td>
+                        <td>97</td>
+                        <td>01100001</td>
+                        <td>U+0061</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>48</td>
+                        <td>00110000</td>
+                        <td>U+0030</td>
+                    </tr>
+                    <tr>
+                        <td>!</td>
+                        <td>33</td>
+                        <td>00100001</td>
+                        <td>U+0021</td>
+                    </tr>
+                    <tr>
+                        <td>@</td>
+                        <td>64</td>
+                        <td>01000000</td>
+                        <td>U+0040</td>
+                    </tr>
+                    <tr>
+                        <td>ف</td>
+                        <td>-</td>
+                        <td>11011000 10110001</td>
+                        <td>U+0641</td>
+                    </tr>
+                    <tr>
+                        <td> space </td>
+                        <td>32</td>
+                        <td>00100000</td>
+                        <td>U+0020</td>
+                    </tr>
+                    <tr>
+                        <td>↵</td>
+                        <td>13</td>
+                        <td>00001101</td>
+                        <td>U+000D</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tool-info neumorphic">
+            <h3><i class="icon-help"></i> راهنمای استفاده</h3>
+            <div class="info-content">
+                <p><strong>کد باینری چیست؟</strong></p>
+                <p>کد باینری یا دودویی روشی برای نمایش اطلاعات با استفاده از دو رقم 0 و 1 است. هر کاراکتر در کامپیوتر به صورت یک دنباله 8 بیتی (1 بایت) از اعداد 0 و 1 نمایش داده می‌شود.</p>
+                
+                <p><strong>نحوه استفاده از ابزار:</strong></p>
+                <ol>
+                    <li>متن خود را در کادر "متن اصلی" وارد کنید</li>
+                    <li>روی دکمه "متن به باینری" کلیک کنید تا متن به کد باینری تبدیل شود</li>
+                    <li>برای تبدیل کد باینری به متن، کد را در کادر باینری وارد کرده و دکمه "باینری به متن" را بزنید</li>
+                    <li>می‌توانید با تنظیمات موجود، نحوه نمایش کد باینری را تغییر دهید</li>
+                </ol>
+                
+                <p><strong>نکات فنی:</strong></p>
+                <ul>
+                    <li>هر کاراکتر استاندارد ASCII با 8 بیت (1 بایت) نمایش داده می‌شود</li>
+                    <li>کاراکترهای Unicode ممکن است به بیش از 1 بایت نیاز داشته باشند</li>
+                    <li>کد باینری خروجی به صورت UTF-8 است که استاندارد رایج برای encoding متن است</li>
+                    <li>برای کاراکترهای فارسی از encoding UTF-8 استفاده می‌شود</li>
+                </ul>
+                
+                <p><strong>کاربردهای تبدیل متن به باینری:</strong></p>
+                <ul>
+                    <li>آموزش مفاهیم پایه علوم کامپیوتر</li>
+                    <li>اشکال‌زدایی و تحلیل داده‌های باینری</li>
+                    <li>پروژه‌های رمزنگاری و امنیتی</li>
+                    <li>برنامه‌نویسی سطح پایین و کار با سخت‌افزار</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="neumorphic">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ابزارهای مرتبط</h3>
+                <ul>
+                    <li><a href="base64.html">کدگذار Base64</a></li>
+                    <li><a href="hex-to-rgb.html">مبدل HEX به RGB</a></li>
+                    <li><a href="text-to-morse.html">مبدل متن به مورس</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>منابع آموزشی</h3>
+                <ul>
+                    <li><a href="https://fa.wikipedia.org/wiki/%D8%B3%DB%8C%D8%B3%D8%AA%D9%85_%D8%A8%D8%A7%D9%86%D8%B1%DB%8C" target="_blank">سیستم باینری در ویکی‌پدیا</a></li>
+                    <li><a href="https://www.asciitable.com/" target="_blank">جدول کامل کدهای ASCII</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> ToolsFree.ir - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های اصلی -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/tools/converters/text-binary.js"></script>
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Add click handlers for binary table
+        document.querySelectorAll('.binary-table td').forEach(td => {
+            td.addEventListener('click', function() {
+                const textToCopy = this.textContent;
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        const toast = document.createElement('div');
+                        toast.className = 'toast-notification success';
+                        toast.textContent = 'کپی شد: ' + textToCopy;
+                        document.body.appendChild(toast);
+                        
+                        setTimeout(() => toast.classList.add('show'), 100);
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                            setTimeout(() => toast.remove(), 500);
+                        }, 2000);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
