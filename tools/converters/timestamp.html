@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبدل Timestamp - ToolsFree.ir</title>
+    <meta name="description" content="تبدیل آنلاین timestamp به تاریخ و زمان و بالعکس">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/tools/converters.css">
+    <style>
+        .timestamp-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .timestamp-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .timestamp-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .timestamp-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .timestamp-options {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-md);
+        }
+        .timestamp-results {
+            margin-top: 20px;
+        }
+        .timestamp-result {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-mono);
+        }
+        .timestamp-result .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        .timestamp-result .value {
+            font-weight: bold;
+            word-break: break-all;
+        }
+        .timezone-selector {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="neumorphic">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="ToolsFree.ir Logo">
+                <h1>ToolsFree.ir</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="neumorphic-btn">خانه</a></li>
+                <li><a href="../../index.html#categories" class="neumorphic-btn">دسته‌بندی ابزارها</a></li>
+                <li><a href="../../about.html" class="neumorphic-btn">درباره ما</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn neumorphic">
+            <i class="icon-menu"></i>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="tool-header neumorphic">
+            <h1><i class="icon-time"></i> مبدل Timestamp</h1>
+            <p>تبدیل timestamp به تاریخ و زمان قابل خواندن و بالعکس</p>
+        </div>
+        
+        <div class="tool-body">
+            <div class="timestamp-container">
+                <div class="timestamp-box neumorphic">
+                    <h3>Timestamp به تاریخ</h3>
+                    <input type="text" id="timestamp-input" class="neumorphic-inset" placeholder="Timestamp را وارد کنید...">
+                    <div class="timestamp-actions">
+                        <button id="convert-to-date-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-convert"></i> تبدیل به تاریخ
+                        </button>
+                        <button id="current-timestamp-btn" class="btn btn-secondary neumorphic">
+                            <i class="icon-clock"></i> زمان فعلی
+                        </button>
+                        <button id="clear-timestamp-btn" class="btn btn-danger neumorphic">
+                            <i class="icon-trash"></i> پاک کردن
+                        </button>
+                    </div>
+                    <div class="timestamp-options">
+                        <label>
+                            <input type="checkbox" id="timestamp-milliseconds" checked>
+                            میلی‌ثانیه (13 رقمی)
+                        </label>
+                        <div class="timezone-selector">
+                            <label for="timezone">منطقه زمانی:</label>
+                            <select id="timezone" class="neumorphic-inset">
+                                <option value="local">محلی</option>
+                                <option value="utc">UTC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="timestamp-results">
+                        <div class="timestamp-result">
+                            <div class="label">تاریخ و زمان:</div>
+                            <div class="value" id="human-date">---</div>
+                        </div>
+                        <div class="timestamp-result">
+                            <div class="label">ISO Format:</div>
+                            <div class="value" id="iso-date">---</div>
+                        </div>
+                        <div class="timestamp-result">
+                            <div class="label">RFC 2822:</div>
+                            <div class="value" id="rfc-date">---</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timestamp-box neumorphic">
+                    <h3>تاریخ به Timestamp</h3>
+                    <div class="date-inputs">
+                        <div class="input-group">
+                            <label>سال:</label>
+                            <input type="number" id="year-input" class="neumorphic-inset" min="1970" max="2100" value="2023">
+                        </div>
+                        <div class="input-group">
+                            <label>ماه:</label>
+                            <select id="month-input" class="neumorphic-inset">
+                                <option value="0">فروردین</option>
+                                <option value="1">اردیبهشت</option>
+                                <option value="2">خرداد</option>
+                                <option value="3">تیر</option>
+                                <option value="4">مرداد</option>
+                                <option value="5">شهریور</option>
+                                <option value="6">مهر</option>
+                                <option value="7">آبان</option>
+                                <option value="8">آذر</option>
+                                <option value="9">دی</option>
+                                <option value="10">بهمن</option>
+                                <option value="11">اسفند</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>روز:</label>
+                            <input type="number" id="day-input" class="neumorphic-inset" min="1" max="31" value="1">
+                        </div>
+                        <div class="input-group">
+                            <label>ساعت:</label>
+                            <input type="number" id="hour-input" class="neumorphic-inset" min="0" max="23" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label>دقیقه:</label>
+                            <input type="number" id="minute-input" class="neumorphic-inset" min="0" max="59" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label>ثانیه:</label>
+                            <input type="number" id="second-input" class="neumorphic-inset" min="0" max="59" value="0">
+                        </div>
+                    </div>
+                    <div class="timestamp-actions">
+                        <button id="convert-to-timestamp-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-convert"></i> تبدیل به Timestamp
+                        </button>
+                        <button id="current-date-btn" class="btn btn-secondary neumorphic">
+                            <i class="icon-clock"></i> تاریخ فعلی
+                        </button>
+                    </div>
+                    <div class="timestamp-results">
+                        <div class="timestamp-result">
+                            <div class="label">Timestamp (ثانیه):</div>
+                            <div class="value" id="timestamp-seconds">---</div>
+                        </div>
+                        <div class="timestamp-result">
+                            <div class="label">Timestamp (میلی‌ثانیه):</div>
+                            <div class="value" id="timestamp-millis">---</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-info neumorphic">
+                <h3><i class="icon-help"></i> راهنمای استفاده</h3>
+                <div class="info-content">
+                    <p><strong>Timestamp چیست؟</strong></p>
+                    <p>Timestamp یک مقدار عددی است که نشان‌دهنده تعداد ثانیه‌ها یا میلی‌ثانیه‌های گذشته از epoch time (معمولاً 1 ژانویه 1970) است. از timestamp برای ذخیره و پردازش تاریخ و زمان در سیستم‌های کامپیوتری استفاده می‌شود.</p>
+                    
+                    <p><strong>انواع timestamp:</strong></p>
+                    <ul>
+                        <li><strong>ثانیه:</strong> 10 رقم (مثل 1672531200)</li>
+                        <li><strong>میلی‌ثانیه:</strong> 13 رقم (مثل 1672531200000)</li>
+                    </ul>
+                    
+                    <p><strong>نحوه استفاده از ابزار:</strong></p>
+                    <ol>
+                        <li>برای تبدیل timestamp به تاریخ، مقدار timestamp را وارد کرده و دکمه "تبدیل به تاریخ" را بزنید</li>
+                        <li>برای تبدیل تاریخ به timestamp، تاریخ مورد نظر را انتخاب کرده و دکمه "تبدیل به timestamp" را بزنید</li>
+                        <li>می‌توانید از دکمه "زمان فعلی" برای دریافت timestamp کنونی استفاده کنید</li>
+                        <li>نتایج به صورت خودکار در بخش‌های مربوطه نمایش داده می‌شوند</li>
+                    </ol>
+                    
+                    <p><strong>کاربردهای timestamp:</strong></p>
+                    <ul>
+                        <li>ذخیره تاریخ و زمان در پایگاه داده</li>
+                        <li>محاسبه تفاوت بین دو تاریخ</li>
+                        <li>زمان‌بندی رویدادها در برنامه‌نویسی</li>
+                        <li>تحلیل داده‌های زمانی</li>
+                        <li>لاگ‌گیری و ردیابی رویدادها</li>
+                    </ul>
+                    
+                    <h4>نمونه timestampها:</h4>
+                    <table class="sample-table">
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>تاریخ معادل</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1 ژانویه 1970 00:00:00 UTC</td>
+                        </tr>
+                        <tr>
+                            <td>1672531200</td>
+                            <td>1 ژانویه 2023 00:00:00 UTC</td>
+                        </tr>
+                        <tr>
+                            <td>4102444800</td>
+                            <td>1 ژانویه 2100 00:00:00 UTC</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="neumorphic">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ابزارهای مرتبط</h3>
+                <ul>
+                    <li><a href="date-difference.html">محاسبه تفاوت تاریخ‌ها</a></li>
+                    <li><a href="timezone-converter.html">مبدل منطقه زمانی</a></li>
+                    <li><a href="unix-timestamp.html">مبدل Unix Timestamp</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>منابع آموزشی</h3>
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Unix Time در ویکی‌پدیا</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">مستندات Date در JavaScript</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> ToolsFree.ir - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های اصلی -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/tools/converters/timestamp.js"></script>
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
