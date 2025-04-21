@@ -1,0 +1,108 @@
+/* استایل‌های مخصوص ابزارهای کمکی */
+.tool-utility {
+  --tool-accent: var(--warning-color);
+}
+
+/* استایل مخصوص Text Tools */
+.text-tools .text-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.text-tools .text-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.text-tools .stat-box {
+  padding: 1rem;
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.text-tools .stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.text-tools .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* استایل مخصوص Regex Tester */
+.regex-tester .regex-flags {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.regex-tester .regex-matches {
+  margin-top: 1.5rem;
+}
+
+.regex-tester .match-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius-sm);
+  background: rgba(163, 177, 198, 0.1);
+  font-family: var(--font-code);
+}
+
+/* استایل مخصوص Color Picker */
+.color-picker .color-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.color-picker .color-swatch {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.color-picker .color-swatch:hover {
+  transform: scale(1.1);
+}
+
+/* استایل مخصوص File Converter */
+.file-converter .file-dropzone {
+  border: 2px dashed var(--shadow-dark);
+  padding: 2rem;
+  text-align: center;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.file-converter .file-info {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-converter .file-icon {
+  font-size: 1.5rem;
+}
+
+.file-converter .file-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-converter .file-remove {
+  color: var(--danger-color);
+  cursor: pointer;
+}
