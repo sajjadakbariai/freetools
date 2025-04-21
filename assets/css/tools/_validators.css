@@ -1,0 +1,105 @@
+/* استایل‌های مخصوص ابزارهای اعتبارسنجی */
+.tool-validator {
+  --tool-accent: var(--danger-color);
+}
+
+.validator-result {
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  margin-top: 1.5rem;
+}
+
+.validator-result.valid {
+  background: rgba(46, 204, 113, 0.1);
+  border-left: 3px solid var(--success-color);
+}
+
+.validator-result.invalid {
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid var(--danger-color);
+}
+
+.validator-result-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.validator-result-details {
+  margin-top: 1rem;
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* استایل مخصوص JSON Validator */
+.json-validator .error-line {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+/* استایل مخصوص Credit Card Validator */
+.credit-card-validator .card-preview {
+  height: 180px;
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.credit-card-validator .card-type {
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+.credit-card-validator .card-number {
+  font-family: var(--font-code);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+}
+
+.credit-card-validator .card-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.credit-card-validator .card-valid {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* استایل مخصوص Password Strength */
+.password-strength .strength-levels {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.password-strength .strength-level {
+  flex: 1;
+  height: 6px;
+  background: rgba(163, 177, 198, 0.3);
+  border-radius: 3px;
+}
+
+.password-strength .strength-criteria {
+  margin-top: 1.5rem;
+}
+
+.password-strength .criteria-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.password-strength .criteria-icon {
+  color: var(--success-color);
+}
