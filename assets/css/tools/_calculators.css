@@ -1,0 +1,101 @@
+/* استایل‌های مخصوص ماشین حساب‌ها */
+.tool-calculator {
+  --tool-accent: var(--success-color);
+}
+
+.calculator-display {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  direction: ltr;
+  font-family: var(--font-code);
+  font-size: 1.5rem;
+  min-height: 60px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-inset);
+  overflow-x: auto;
+}
+
+.calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.calculator-key {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calculator-key.span-2 {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+
+.calculator-key.function {
+  background: rgba(163, 177, 198, 0.2);
+}
+
+.calculator-key.operator {
+  background: var(--accent-color);
+  color: white;
+}
+
+.calculator-key.equals {
+  background: var(--success-color);
+  color: white;
+}
+
+/* استایل مخصوص BMI Calculator */
+.bmi-calculator .bmi-result {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  margin-top: 1.5rem;
+}
+
+.bmi-calculator .bmi-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.bmi-calculator .bmi-category {
+  font-size: 1.25rem;
+}
+
+.bmi-calculator .bmi-scale {
+  margin-top: 2rem;
+  display: flex;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-inset);
+}
+
+.bmi-calculator .scale-segment {
+  height: 100%;
+}
+
+/* استایل مخصوص Loan Calculator */
+.loan-calculator .results {
+  margin-top: 2rem;
+}
+
+.loan-calculator .result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(163, 177, 198, 0.3);
+}
+
+.loan-calculator .result-item:last-child {
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
