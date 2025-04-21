@@ -445,3 +445,60 @@
         padding: 3px;
     }
 }
+
+/* HEX to RGB Converter Specific Styles */
+.hex-rgb-converter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.color-preview-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.color-preview {
+    width: 100%;
+    height: 80px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.color-sliders {
+    margin-top: 15px;
+}
+
+.color-slider {
+    margin-bottom: 15px;
+}
+
+.color-slider label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.color-slider input[type="range"] {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .color-converter-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .color-preview-container {
+        padding: 12px;
+    }
+    
+    .color-preview {
+        height: 60px;
+    }
+}
