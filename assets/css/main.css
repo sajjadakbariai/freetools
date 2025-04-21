@@ -1,0 +1,89 @@
+/* فایل اصلی CSS - جمع‌کننده تمام بخش‌ها */
+/* Core Styles */
+@import url('./core/_variables.css');
+@import url('./core/_reset.css');
+@import url('./core/_base.css');
+@import url('./core/_neumorphic.css');
+
+/* Components */
+@import url('./components/_buttons.css');
+@import url('./components/_cards.css');
+@import url('./components/_forms.css');
+@import url('./components/_tabs.css');
+@import url('./components/_tables.css');
+@import url('./components/_alerts.css');
+
+/* Tools */
+@import url('./tools.css');
+
+/* Animations */
+@import url('./animations.css');
+
+/* Responsive */
+@import url('./responsive.css');
+
+/* استایل‌های سفارشی اضافی */
+.toast-notification {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  background: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+.toast-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-notification.success {
+  border-right: 3px solid var(--success-color);
+}
+
+.toast-notification.error {
+  border-right: 3px solid var(--danger-color);
+}
+
+.tool-tour-highlight {
+  position: relative;
+  z-index: 999;
+  animation: pulse 2s infinite;
+}
+
+.tool-tour-highlight::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--accent-color);
+  pointer-events: none;
+}
+
+/* اسکرول بار سفارشی */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--shadow-dark);
+}
