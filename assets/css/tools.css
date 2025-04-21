@@ -1,0 +1,82 @@
+/* فایل اصلی استایل‌های ابزارها */
+@import url('./tools/_converters.css');
+@import url('./tools/_calculators.css');
+@import url('./tools/_generators.css');
+@import url('./tools/_validators.css');
+@import url('./tools/_utilities.css');
+
+/* استایل‌های مشترک تمام ابزارها */
+.tool-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.tool-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tool-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tool-header p {
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tool-body {
+  background: var(--primary-color);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tool-section {
+  margin-bottom: 2rem;
+}
+
+.tool-section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-section-title::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: var(--tool-accent);
+  border-radius: 50%;
+}
+
+.tool-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* تبلیغات و بنرها */
+.tool-ad {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: var(--border-radius-md);
+  background: rgba(163, 177, 198, 0.1);
+  text-align: center;
+}
+
+/* حالت responsive ابزارها */
+@media (max-width: 768px) {
+  .tool-body {
+    padding: 1.5rem;
+  }
+  
+  .tool-header h1 {
+    font-size: 1.5rem;
+  }
+}
