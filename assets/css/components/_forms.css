@@ -1,0 +1,137 @@
+/* استایل‌های پیشرفته فرم */
+.input-group {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.input-group .form-control {
+  flex: 1;
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+}
+
+.input-group .btn {
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+}
+
+.input-group-prepend .btn {
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+}
+
+.input-group-append .form-control {
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+}
+
+/* سوئیچ نئومورفیک */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-color);
+  box-shadow: var(--shadow-inset);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: var(--success-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+  box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* چک‌باکس و رادیو نئومورفیک */
+.checkbox, .radio {
+  display: block;
+  position: relative;
+  padding-right: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox input, .radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox .checkmark, .radio .checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-color);
+  box-shadow: var(--shadow-inset);
+  border-radius: var(--border-radius-sm);
+}
+
+.radio .checkmark {
+  border-radius: 50%;
+}
+
+.checkbox:hover .checkmark, .radio:hover .checkmark {
+  box-shadow: inset 1px 1px 3px var(--shadow-dark), inset -1px -1px 3px var(--shadow-light);
+}
+
+.checkbox input:checked ~ .checkmark, .radio input:checked ~ .checkmark {
+  background: var(--success-color);
+  box-shadow: none;
+}
+
+.checkbox .checkmark:after, .radio .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.radio input:checked ~ .checkmark:after {
+  display: block;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
