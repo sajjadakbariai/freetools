@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبدل Markdown به HTML - ToolsFree.ir</title>
+    <meta name="description" content="تبدیل آنلاین متن‌های Markdown به HTML به صورت رایگان">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/tools/converters.css">
+    <!-- کتابخانه CodeMirror برای هایلایت سینتکس -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css">
+    <style>
+        .markdown-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 992px) {
+            .markdown-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .markdown-box {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .markdown-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .markdown-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .markdown-toolbar button {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .markdown-preview {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            min-height: 100px;
+            background: white;
+        }
+        .markdown-cheatsheet {
+            margin-top: 20px;
+        }
+        .markdown-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        .markdown-cheatsheet th, .markdown-cheatsheet td {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            text-align: right;
+        }
+        .markdown-cheatsheet th {
+            background: var(--hover-color);
+        }
+        .markdown-cheatsheet td:first-child {
+            font-family: var(--font-mono);
+        }
+        .CodeMirror {
+            height: 300px;
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header class="neumorphic">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="ToolsFree.ir Logo">
+                <h1>ToolsFree.ir</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="neumorphic-btn">خانه</a></li>
+                <li><a href="../../index.html#categories" class="neumorphic-btn">دسته‌بندی ابزارها</a></li>
+                <li><a href="../../about.html" class="neumorphic-btn">درباره ما</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn neumorphic">
+            <i class="icon-menu"></i>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="tool-header neumorphic">
+            <h1><i class="icon-markdown"></i> مبدل Markdown به HTML</h1>
+            <p>تبدیل متن‌های Markdown به کد HTML به صورت آنلاین</p>
+        </div>
+        
+        <div class="tool-body">
+            <div class="markdown-container">
+                <div class="markdown-box neumorphic">
+                    <h3>متن Markdown</h3>
+                    <div class="markdown-toolbar">
+                        <button class="btn btn-small neumorphic" data-insert="# ">عنوان 1</button>
+                        <button class="btn btn-small neumorphic" data-insert="## ">عنوان 2</button>
+                        <button class="btn btn-small neumorphic" data-insert="** **" data-selected="bold">بولد</button>
+                        <button class="btn btn-small neumorphic" data-insert="* *" data-selected="italic">ایتالیک</button>
+                        <button class="btn btn-small neumorphic" data-insert="[ ]( )">لینک</button>
+                        <button class="btn btn-small neumorphic" data-insert="![ ]( )">تصویر</button>
+                        <button class="btn btn-small neumorphic" data-insert="- ">لیست</button>
+                        <button class="btn btn-small neumorphic" data-insert="```\n\n```">کد</button>
+                        <button class="btn btn-small neumorphic" data-insert="> ">نقل قول</button>
+                        <button class="btn btn-small neumorphic" data-insert="---">خط افقی</button>
+                    </div>
+                    <textarea id="markdown-input" class="neumorphic-inset" placeholder="متن Markdown خود را اینجا وارد کنید..."></textarea>
+                    <div class="markdown-actions">
+                        <button id="convert-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-convert"></i> تبدیل به HTML
+                        </button>
+                        <button id="clear-btn" class="btn btn-danger neumorphic">
+                            <i class="icon-trash"></i> پاک کردن
+                        </button>
+                        <button id="sample-btn" class="btn btn-secondary neumorphic">
+                            <i class="icon-file"></i> نمونه Markdown
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="markdown-box neumorphic">
+                    <h3>نتیجه HTML</h3>
+                    <div id="html-editor"></div>
+                    <div class="markdown-actions">
+                        <button id="copy-html-btn" class="btn btn-success neumorphic">
+                            <i class="icon-copy"></i> کپی HTML
+                        </button>
+                        <button id="download-html-btn" class="btn btn-info neumorphic">
+                            <i class="icon-download"></i> دانلود HTML
+                        </button>
+                    </div>
+                    <div class="markdown-preview">
+                        <h4>پیش‌نمایش:</h4>
+                        <div id="html-preview"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="markdown-cheatsheet neumorphic">
+                <h3><i class="icon-help"></i> راهنمای سریع Markdown</h3>
+                <table>
+                    <tr>
+                        <th>نتیجه</th>
+                        <th>نحوه نوشتن در Markdown</th>
+                    </tr>
+                    <tr>
+                        <td><strong>متن بولد</strong></td>
+                        <td>**متن بولد** یا __متن بولد__</td>
+                    </tr>
+                    <tr>
+                        <td><em>متن ایتالیک</em></td>
+                        <td>*متن ایتالیک* یا _متن ایتالیک_</td>
+                    </tr>
+                    <tr>
+                        <td><h1>عنوان 1</h1></td>
+                        <td># عنوان 1</td>
+                    </tr>
+                    <tr>
+                        <td><h2>عنوان 2</h2></td>
+                        <td>## عنوان 2</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">لینک</a></td>
+                        <td>[لینک](آدرس-لینک)</td>
+                    </tr>
+                    <tr>
+                        <td><img src="#" alt="تصویر"></td>
+                        <td>![متن جایگزین](آدرس-تصویر)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>لیست</li>
+                                <li>موارد</li>
+                            </ul>
+                        </td>
+                        <td>- لیست<br>- موارد</td>
+                    </tr>
+                    <tr>
+                        <td><code>کد درون خطی</code></td>
+                        <td>`کد درون خطی`</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>بلوک کد</pre>
+                        </td>
+                        <td>```<br>بلوک کد<br>```</td>
+                    </tr>
+                    <tr>
+                        <td><blockquote>نقل قول</blockquote></td>
+                        <td>> نقل قول</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tool-info neumorphic">
+            <h3><i class="icon-info"></i> اطلاعات بیشتر</h3>
+            <div class="info-content">
+                <p><strong>Markdown چیست؟</strong></p>
+                <p>Markdown یک زبان نشانه‌گذاری سبک‌وزن است که با استفاده از نشانه‌های متنی ساده، امکان فرمت‌دهی به متن را فراهم می‌کند. این زبان در سال 2004 توسط جان گروبر ایجاد شد و امروزه به طور گسترده در مستندات، فایل‌های README، سیستم‌های مدیریت محتوا و پیام‌رسانی استفاده می‌شود.</p>
+                
+                <p><strong>مزایای استفاده از Markdown:</strong></p>
+                <ul>
+                    <li>خوانایی بالا حتی در حالت خام</li>
+                    <li>تبدیل آسان به HTML و سایر فرمت‌ها</li>
+                    <li>پشتیبانی گسترده توسط پلتفرم‌های مختلف</li>
+                    <li>عدم نیاز به نرم‌افزارهای پیچیده</li>
+                    <li>امکان استفاده در فایل‌های متنی ساده</li>
+                </ul>
+                
+                <p><strong>کاربردهای Markdown:</strong></p>
+                <ul>
+                    <li>نوشتن مستندات فنی و راهنماها</li>
+                    <li>ایجاد محتوای وبلاگ‌ها و سایت‌ها</li>
+                    <li>نوشتن ایمیل‌های فرمت‌دار</li>
+                    <li>تهیه فایل‌های README برای پروژه‌های نرم‌افزاری</li>
+                    <li>نوشتن کتاب‌های الکترونیکی</li>
+                </ul>
+                
+                <p><strong>نحوه استفاده از ابزار:</strong></p>
+                <ol>
+                    <li>متن Markdown خود را در کادر سمت راست وارد کنید</li>
+                    <li>روی دکمه "تبدیل به HTML" کلیک کنید</li>
+                    <li>کد HTML تولید شده را کپی یا دانلود کنید</li>
+                    <li>برای یادگیری نحوه نوشتن Markdown از جدول راهنمای بالا استفاده کنید</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <footer class="neumorphic">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ابزارهای مرتبط</h3>
+                <ul>
+                    <li><a href="html-to-markdown.html">مبدل HTML به Markdown</a></li>
+                    <li><a href="html-entities.html">کدگذار HTML Entities</a></li>
+                    <li><a href="json-formatter.html">فرمت‌کننده JSON</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>منابع آموزشی</h3>
+                <ul>
+                    <li><a href="https://commonmark.org/help/" target="_blank">راهنمای Markdown</a></li>
+                    <li><a href="https://www.markdownguide.org/" target="_blank">راهنمای کامل Markdown</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> ToolsFree.ir - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- کتابخانه‌های جانبی -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/html-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/xml-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <!-- اسکریپت‌های اصلی -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/tools/converters/markdown-html.js"></script>
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
