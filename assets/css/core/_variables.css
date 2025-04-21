@@ -1,0 +1,37 @@
+:root {
+  /* رنگ‌های پایه */
+  --primary-color: #e0e5ec;
+  --shadow-light: #ffffff;
+  --shadow-dark: #a3b1c6;
+  --text-color: #2c3e50;
+  --text-light: #7f8c8d;
+  
+  /* رنگ‌های تم */
+  --accent-color: #6b7b8c;
+  --success-color: #2ecc71;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --info-color: #3498db;
+  --purple-color: #9b59b6;
+  
+  /* سایه‌ها */
+  --shadow-sm: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  --shadow-md: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  --shadow-lg: 9px 9px 18px var(--shadow-dark), -9px -9px 18px var(--shadow-light);
+  --shadow-inset: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+  
+  /* فونت‌ها */
+  --font-primary: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-code: 'Fira Code', 'Courier New', monospace;
+  
+  /* اندازه‌ها */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  
+  /* transition */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
