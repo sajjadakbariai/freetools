@@ -1,0 +1,53 @@
+/* JSON Formatter Specific Styles */
+.json-formatter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.json-formatter-container .tool-input,
+.json-formatter-container .tool-output {
+    padding: 20px;
+}
+
+.json-formatter-container h3 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.json-formatter-container textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.json-formatter-container .CodeMirror {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+}
+
+.json-formatter-container .CodeMirror-gutters {
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .json-formatter-container {
+        gap: 15px;
+    }
+    
+    .json-formatter-container .tool-input,
+    .json-formatter-container .tool-output {
+        padding: 15px;
+    }
+    
+    .json-formatter-container textarea {
+        min-height: 150px;
+    }
+}
