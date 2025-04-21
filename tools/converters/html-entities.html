@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کدگذار HTML Entities - ToolsFree.ir</title>
+    <meta name="description" content="ابزار آنلاین تبدیل کاراکترهای خاص به معادل HTML Entity و بالعکس">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/tools/converters.css">
+    <style>
+        .html-entities-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .html-entities-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .entities-box {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .entities-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .entities-options {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-md);
+        }
+        .entities-preview {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            min-height: 60px;
+        }
+        .common-entities {
+            margin-top: 20px;
+        }
+        .common-entities h4 {
+            margin-bottom: 10px;
+        }
+        .entities-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        .entities-table th, .entities-table td {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .entities-table th {
+            background: var(--hover-color);
+        }
+        .entities-table td:hover {
+            background: var(--hover-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="neumorphic">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="ToolsFree.ir Logo">
+                <h1>ToolsFree.ir</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="neumorphic-btn">خانه</a></li>
+                <li><a href="../../index.html#categories" class="neumorphic-btn">دسته‌بندی ابزارها</a></li>
+                <li><a href="../../about.html" class="neumorphic-btn">درباره ما</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn neumorphic">
+            <i class="icon-menu"></i>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="tool-header neumorphic">
+            <h1><i class="icon-html"></i> کدگذار/رمزگشای HTML Entities</h1>
+            <p>تبدیل کاراکترهای خاص به معادل HTML Entity و بالعکس</p>
+        </div>
+        
+        <div class="tool-body">
+            <div class="html-entities-container">
+                <div class="entities-box neumorphic">
+                    <h3>متن اصلی</h3>
+                    <textarea id="input-text" class="neumorphic-inset" placeholder="متن یا کد HTML خود را اینجا وارد کنید..."></textarea>
+                    <div class="entities-actions">
+                        <button id="encode-btn" class="btn btn-primary neumorphic">
+                            <i class="icon-encode"></i> کدگذاری
+                        </button>
+                        <button id="encode-all-btn" class="btn btn-info neumorphic">
+                            <i class="icon-encode-full"></i> کدگذاری همه
+                        </button>
+                        <button id="clear-input-btn" class="btn btn-danger neumorphic">
+                            <i class="icon-trash"></i> پاک کردن
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="entities-box neumorphic">
+                    <h3>نتیجه کدگذاری/رمزگشایی</h3>
+                    <textarea id="output-text" class="neumorphic-inset" placeholder="نتیجه اینجا نمایش داده می‌شود..." readonly></textarea>
+                    <div class="entities-actions">
+                        <button id="decode-btn" class="btn btn-accent neumorphic">
+                            <i class="icon-decode"></i> رمزگشایی
+                        </button>
+                        <button id="copy-output-btn" class="btn btn-success neumorphic">
+                            <i class="icon-copy"></i> کپی
+                        </button>
+                    </div>
+                    <div class="entities-preview">
+                        <h4>پیش‌نمایش:</h4>
+                        <div id="html-preview"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entities-options neumorphic">
+                <h3><i class="icon-settings"></i> تنظیمات کدگذاری</h3>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="encode-special" checked>
+                        کدگذاری کاراکترهای خاص (&, <, >, ", ')
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="encode-nonascii">
+                        کدگذاری کاراکترهای غیر ASCII (فارسی، عربی و...)
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="encode-hex">
+                        استفاده از کدهای هگز (Hex) به جای نام Entities
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="encode-decimal">
+                        استفاده از کدهای دسیمال (Decimal)
+                    </label>
+                </div>
+            </div>
+            
+            <div class="common-entities neumorphic">
+                <h4><i class="icon-list"></i> Entities پرکاربرد:</h4>
+                <table class="entities-table">
+                    <tr>
+                        <th>کاراکتر</th>
+                        <th>Entity Name</th>
+                        <th>Entity Number</th>
+                        <th>Hex Code</th>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&amp;nbsp;</td>
+                        <td>&amp;#160;</td>
+                        <td>&amp;#xA0;</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;</td>
+                        <td>&amp;lt;</td>
+                        <td>&amp;#60;</td>
+                        <td>&amp;#x3C;</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;</td>
+                        <td>&amp;gt;</td>
+                        <td>&amp;#62;</td>
+                        <td>&amp;#x3E;</td>
+                    </tr>
+                    <tr>
+                        <td>&amp;</td>
+                        <td>&amp;amp;</td>
+                        <td>&amp;#38;</td>
+                        <td>&amp;#x26;</td>
+                    </tr>
+                    <tr>
+                        <td>"</td>
+                        <td>&amp;quot;</td>
+                        <td>&amp;#34;</td>
+                        <td>&amp;#x22;</td>
+                    </tr>
+                    <tr>
+                        <td>©</td>
+                        <td>&amp;copy;</td>
+                        <td>&amp;#169;</td>
+                        <td>&amp;#xA9;</td>
+                    </tr>
+                    <tr>
+                        <td>®</td>
+                        <td>&amp;reg;</td>
+                        <td>&amp;#174;</td>
+                        <td>&amp;#xAE;</td>
+                    </tr>
+                    <tr>
+                        <td>€</td>
+                        <td>&amp;euro;</td>
+                        <td>&amp;#8364;</td>
+                        <td>&amp;#x20AC;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tool-info neumorphic">
+            <h3><i class="icon-help"></i> راهنمای استفاده</h3>
+            <div class="info-content">
+                <p><strong>HTML Entities چیست؟</strong></p>
+                <p>HTML Entities روشی برای نمایش کاراکترهای خاص در HTML است که ممکن است با تگ‌های HTML اشتباه گرفته شوند یا در مرورگرها به درستی نمایش داده نشوند. هر Entity با علامت آمپرسند (&) شروع و با سمیکالن (;) پایان می‌یابد.</p>
+                
+                <p><strong>نحوه استفاده از ابزار:</strong></p>
+                <ol>
+                    <li>متن یا کد HTML خود را در کادر "متن اصلی" وارد کنید</li>
+                    <li>برای کدگذاری از دکمه "کدگذاری" یا "کدگذاری همه" استفاده کنید</li>
+                    <li>برای رمزگشایی، متن کدگذاری شده را در کادر ورودی قرار داده و دکمه "رمزگشایی" را بزنید</li>
+                    <li>می‌توانید با تنظیمات موجود، نحوه کدگذاری را شخصی‌سازی کنید</li>
+                    <li>برای استفاده از Entities پرکاربرد می‌توانید از جدول پایین صفحه استفاده کنید</li>
+                </ol>
+                
+                <p><strong>تفاوت انواع کدگذاری:</strong></p>
+                <ul>
+                    <li><strong>Entity Name:</strong> &amp;name; (مثال: &amp;copy; برای ©)</li>
+                    <li><strong>Entity Number:</strong> &amp;#number; (مثال: &amp;#169; برای ©)</li>
+                    <li><strong>Hex Code:</strong> &amp;#xhex; (مثال: &amp;#xA9; برای ©)</li>
+                </ul>
+                
+                <p><strong>کاربردهای HTML Entities:</strong></p>
+                <ul>
+                    <li>جلوگیری از تفسیر نادرست کاراکترهای خاص به عنوان تگ HTML</li>
+                    <li>نمایش کاراکترهایی که در صفحه‌کلید وجود ندارند</li>
+                    <li>پیشگیری از حملات XSS (Cross-Site Scripting)</li>
+                    <li>نمایش صحیح کاراکترهای خاص در تمام مرورگرها</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="neumorphic">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ابزارهای مرتبط</h3>
+                <ul>
+                    <li><a href="url-encoder.html">کدگذار URL</a></li>
+                    <li><a href="base64.html">کدگذار Base64</a></li>
+                    <li><a href="json-formatter.html">فرمت‌کننده JSON</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>منابع آموزشی</h3>
+                <ul>
+                    <li><a href="https://dev.w3.org/html5/html-author/charref" target="_blank">مرجع کامل Entities</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references" target="_blank">لیست Entities در ویکی‌پدیا</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> ToolsFree.ir - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های اصلی -->
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/tools/converters/html-entities.js"></script>
+    
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Add click handlers for common entities table
+        document.querySelectorAll('.entities-table td').forEach(td => {
+            td.addEventListener('click', function() {
+                const textToCopy = this.textContent;
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        const toast = document.createElement('div');
+                        toast.className = 'toast-notification success';
+                        toast.textContent = 'کپی شد: ' + textToCopy;
+                        document.body.appendChild(toast);
+                        
+                        setTimeout(() => toast.classList.add('show'), 100);
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                            setTimeout(() => toast.remove(), 500);
+                        }, 2000);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
