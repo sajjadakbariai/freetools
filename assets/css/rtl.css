@@ -1,0 +1,53 @@
+/* استایل‌های مخصوص راست به چپ */
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* اصلاحات برای عناصر خاص */
+.input-group .form-control {
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+}
+
+.input-group .btn:first-child {
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+}
+
+.dropdown-menu {
+  right: 0;
+  left: auto;
+  text-align: right;
+}
+
+.alert {
+  border-right: none;
+  border-left: 3px solid;
+}
+
+.validator-result {
+  border-right: none;
+  border-left: 3px solid;
+}
+
+/* اصلاحات برای ابزارهای خاص */
+.json-formatter .CodeMirror-gutters {
+  right: 0;
+  left: auto;
+}
+
+.checkbox .checkmark,
+.radio .checkmark {
+  right: auto;
+  left: 0;
+}
+
+.checkbox input:checked ~ .checkmark:after {
+  left: auto;
+  right: 7px;
+}
+
+/* اصلاحات برای تب‌ها */
+.tab:not(:last-child)::after {
+  right: 0;
+  left: auto;
+}
