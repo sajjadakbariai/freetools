@@ -1,0 +1,103 @@
+/* استایل‌های مخصوص ابزارهای تولیدکننده */
+.tool-generator {
+  --tool-accent: var(--purple-color);
+}
+
+.generator-preview {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-inset);
+  min-height: 200px;
+}
+
+/* استایل مخصوص Password Generator */
+.password-generator .password-display {
+  position: relative;
+}
+
+.password-generator .copy-btn {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(163, 177, 198, 0.3);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.password-generator .strength-meter {
+  height: 6px;
+  background: var(--primary-color);
+  margin: 1rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: var(--shadow-inset);
+}
+
+.password-generator .strength-level {
+  height: 100%;
+  width: 0;
+  transition: width 0.5s ease;
+}
+
+/* استایل مخصوص QR Code Generator */
+.qr-generator .qr-options {
+  margin-top: 1.5rem;
+}
+
+.qr-generator .color-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.qr-generator .color-picker {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-inset);
+  cursor: pointer;
+}
+
+/* استایل مخصوص Gradient Generator */
+.gradient-generator .gradient-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.gradient-generator .gradient-type {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.gradient-generator .gradient-angle {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.gradient-generator .color-stops {
+  margin-top: 1rem;
+}
+
+.gradient-generator .color-stop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gradient-generator .stop-position {
+  width: 60px;
+}
