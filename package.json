@@ -1,0 +1,4 @@
+"scripts": {
+  "build:css": "postcss assets/css/main.css -o dist/assets/css/main.min.css",
+  "watch:css": "postcss assets/css/main.css -o dist/assets/css/main.min.css --watch"
+}
