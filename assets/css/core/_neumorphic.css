@@ -1,0 +1,141 @@
+/* کامپوننت‌های نئومورفیک پایه */
+.neumorphic {
+  background: var(--primary-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
+}
+
+.neumorphic:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.neumorphic:active {
+  box-shadow: var(--shadow-inset);
+}
+
+.neumorphic-inset {
+  background: var(--primary-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-inset);
+}
+
+.neumorphic-flat {
+  background: var(--primary-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: none;
+  border: 1px solid rgba(163, 177, 198, 0.3);
+}
+
+/* دکمه‌های نئومورفیک */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: var(--text-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  box-shadow: var(--shadow-inset);
+}
+
+.btn-accent {
+  background: var(--accent-color);
+  color: white;
+}
+
+.btn-success {
+  background: var(--success-color);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-info {
+  background: var(--info-color);
+  color: white;
+}
+
+.btn-warning {
+  background: var(--warning-color);
+  color: white;
+}
+
+.btn-purple {
+  background: var(--purple-color);
+  color: white;
+}
+
+/* فرم‌های نئومورفیک */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-md);
+  background: var(--primary-color);
+  box-shadow: var(--shadow-inset);
+  transition: all var(--transition-normal);
+}
+
+.form-control:focus {
+  box-shadow: inset 1px 1px 3px var(--shadow-dark), inset -1px -1px 3px var(--shadow-light);
+}
+
+/* کارت‌های نئومورفیک */
+.card {
+  padding: 1.5rem;
+  border-radius: var(--border-radius-lg);
+}
+
+.card-header {
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
